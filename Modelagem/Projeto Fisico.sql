@@ -1,61 +1,62 @@
-CREATE TABLE Autor (
-Id int auto_increment,
-Nome Varchar(255) not null,
-Data_Nascimento Date not null,
-CPF Char(11) not null,
-PRIMARY KEY(Id)
+CREATE TABLE autor (
+id int auto_increment,
+nome varchar(255) not null,
+data_nascimento date not null,
+cpf char(11) not null,
+PRIMARY KEY(id)
 );
 
-CREATE TABLE Categoria (
-Id int auto_increment,
-Descricao Varchar(100) not null,
-PRIMARY KEY (Id)
+CREATE TABLE categoria (
+id int auto_increment,
+descricao varchar(100) not null,
+PRIMARY KEY (id)
 );
 
-CREATE TABLE Livro (
-Id int auto_increment ,
-Id_Categoria int not null,
-Titulo varchar(255) not null,
-Editora varchar(150) not null,
-Ano Year not null,
-Isbn varchar(100) not null,
-PRIMARY KEY (Id),
-FOREIGN KEY (Id_Categoria) REFERENCES Categoria(Id)
+CREATE TABLE livro (
+id int auto_increment,
+id_categoria int not null,
+titulo varchar(255) not null,
+editora varchar(150) not null,
+ano year not null,
+isbn varchar(100) not null,
+PRIMARY KEY (id),
+FOREIGN KEY (id_categoria) REFERENCES categoria(id)
 );
 
-CREATE TABLE Aluno (
-Id int auto_increment,
-Nome varchar(150),
-RA int,
-Curso varchar(150),
-PRIMARY KEY(Id)
+CREATE TABLE aluno (
+id int auto_increment,
+nome varchar(150),
+ra int,
+curso varchar(150),
+PRIMARY KEY(id)
 );
 
-CREATE TABLE Usuario (
-Id int auto_increment,
-Nome varchar(150),
-Email varchar(150),
-Senha varchar(100),
-PRIMARY KEY(Id)
+CREATE TABLE usuario (
+id int auto_increment,
+nome varchar(150),
+email varchar(150),
+senha varchar(100),
+PRIMARY KEY(id)
 );
 
-CREATE TABLE Livro_Autor_Assoc (
-Id_Livro int not null,
-Id_Autor int not null,
-FOREIGN KEY(Id_Livro) REFERENCES Livro (Id),
-FOREIGN KEY(Id_Autor) REFERENCES Autor (Id),
-PRIMARY KEY(Id_Livro, Id_Autor)
+CREATE TABLE livro_autor_assoc (
+id_livro int not null,
+id_autor int not null,
+FOREIGN KEY(id_livro) REFERENCES livro (id),
+FOREIGN KEY(id_autor) REFERENCES autor (id),
+PRIMARY KEY(id_livro, id_autor)
 );
 
-CREATE TABLE Emprestimo (
-Id int auto_increment,
-Data_Emprestimo Date not null,
-Data_Devolucao Date not null,
-Id_Usuario int not null,
-Id_Aluno int not null,
-Id_Livro int not null,
-PRIMARY KEY(Id),
-FOREIGN KEY(Id_Usuario) REFERENCES Usuario (Id),
-FOREIGN KEY(Id_Livro) REFERENCES Livro (Id),
-FOREIGN KEY(Id_Aluno) REFERENCES Aluno (Id)
+CREATE TABLE emprestimo (
+id int auto_increment,
+data_emprestimo date not null,
+data_devolucao date not null,
+id_usuario int not null,
+id_aluno int not null,
+id_livro int not null,
+PRIMARY KEY(id),
+FOREIGN KEY(id_usuario) REFERENCES usuario (id),
+FOREIGN KEY(id_livro) REFERENCES livro (id),
+FOREIGN KEY(id_aluno) REFERENCES aluno (id)
 );
+

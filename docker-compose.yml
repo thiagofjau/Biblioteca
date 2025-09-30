@@ -1,0 +1,38 @@
+services:
+  php:
+    container_name: meu_servidor_php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+
+
+  mysql:
+    # Nome do contêiner, será usado para acessar o banco de dados, no host
+    container_name: meu_servidor_mysql
+    image: mysql:8.0
+    restart: always
+    environment:    
+      # Definindo a senha do root do MySQL
+      MYSQL_ROOT_PASSWORD: root
+      
+      # Definindo o nome do banco de dados, criando-o automaticamente
+      # quando o contêiner for iniciado pela primeira vez
+      MYSQL_DATABASE: db_biblioteca
+      
+      # Criando um usuário e senha para o banco de dados
+      MYSQL_USER: user
+      MYSQL_PASSWORD: senha
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+
+
+volumes:
+  mysql-data:
